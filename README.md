@@ -6,7 +6,7 @@ Policy papers on distributed governance, anti-capture architecture, and democrat
 
 ## Contents
 
-- [Distributed Governance Model](#distributed-governance-model---tex--pdf) — expanded policy paper (August 2026)
+- [Distributed Governance Model](#distributed-governance-model---tex-pdf) — expanded policy paper (August 2026)
 
 ---
 
