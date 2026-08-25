@@ -6,17 +6,19 @@ Policy papers on distributed governance, anti-capture architecture, and democrat
 
 ## Contents
 
-- [Distributed Governance Model](#distributed-governance-model---tex-pdf) — expanded policy paper (August 2026)
+- [Distributed Governance Model](#distributed-governance-model---tex-pdf) — working draft v3 — core package + experimental tracks (August 2026)
 
 ---
 
 ## Distributed Governance Model - [tex](./papers/distributed_governance_model.tex) | [pdf](./papers/distributed_governance_model.pdf)
 
-*Redesigning Democratic Accountability: A Distributed, Competency-Aware, and Anti-Capture Governance Architecture for Australia* (Expanded working draft, Version 2, August 2026).
+*Redesigning Democratic Accountability: Incentive Inversion, Near-Term Integrity Reform, and Experimental Pathways for Australia* (Working draft, Version 3, August 2026).
 
-A systems-level response to Australia’s lobbying transparency gaps, revolving-door weaknesses, and limited public audit of ministerial access. Covers near-term legislative modules (mandatory ministerial diaries, expanded influence register, enforceable cooling-off, public advice records) and a longer architectural direction (region-first hierarchy, competency mechanisms, anti-capture rules).
+**Basic idea:** invert incentives so privileged private access is harder to hide and less decisive, while advice and influence trails are cheaper to audit. The actionable core is a near-term integrity package (diaries, functional influence register, enforceable cooling-off, selected public advice records, oversight).
 
-Compile with `pdflatex` (standard packages + tikz + tcolorbox for the full source).
+**Beyond the core:** preferential citizen signalling, competency aids for appointments, and region-first competence pilots are framed as *experimental tracks* with pilot designs and stop/scale rules — potential improvements that need empirical evidence before scale-up.
+
+Compile with `pdflatex` (standard packages + tikz + tcolorbox).
 
 ---
 
