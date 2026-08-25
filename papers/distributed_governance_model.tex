@@ -1,15 +1,385 @@
 \documentclass[11pt,a4paper]{article}
 
-% Full paper content - see local artifacts for complete version if truncated
-% This is the expanded Version 2 governance architecture paper.
+% Packages
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{url}
+\usepackage{parskip}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{float}
 
-\title{Redesigning Democratic Accountability}
-\author{Working Draft --- Version 2}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,fit,calc,backgrounds}
+
+% Hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=blue!60!black,
+    urlcolor=blue!60!black
+}
+
+% Title formats
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Distributed Fiduciary Governance Model}
+\fancyhead[R]{\small Expanded Policy Paper}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\onehalfspacing
+
+% Colours
+\definecolor{modelblue}{RGB}{30,70,120}
+\definecolor{modelgreen}{RGB}{40,120,80}
+\definecolor{modelorange}{RGB}{180,90,30}
+\definecolor{modelgray}{RGB}{90,90,90}
+\definecolor{lightblue}{RGB}{230,240,250}
+\definecolor{lightgreen}{RGB}{230,245,235}
+\definecolor{lightorange}{RGB}{255,240,220}
+
+% Boxes
+\tcbuselibrary{skins,breakable}
+\newtcolorbox{principlebox}[1][]{
+    colback=lightblue,colframe=modelblue,fonttitle=\bfseries,
+    title=#1,breakable,left=4pt,right=4pt,top=3pt,bottom=3pt
+}
+\newtcolorbox{warningbox}[1][]{
+    colback=lightorange,colframe=modelorange,fonttitle=\bfseries,
+    title=#1,breakable,left=4pt,right=4pt,top=3pt,bottom=3pt
+}
+\newtcolorbox{modulebox}[1][]{
+    colback=lightgreen,colframe=modelgreen,fonttitle=\bfseries,
+    title=#1,breakable,left=4pt,right=4pt,top=3pt,bottom=3pt
+}
+
+\title{
+\textbf{Redesigning Democratic Accountability}\\[0.3em]
+\large A Distributed, Competency-Aware, and Anti-Capture\\
+Governance Architecture for Australia
+}
+\author{
+Expanded Policy Discussion Paper\\[0.4em]
+\textit{Working Draft --- Version 2}
+}
 \date{August 2026}
 
 \begin{document}
+
 \maketitle
 
-See the full LaTeX source in the repository. The complete expanded paper covers design principles, region-first hierarchy, competency mechanisms, anti-capture rules, modular near-term reforms, staged rollout, and risk analysis.
+\begin{abstract}
+\noindent
+Australia’s arrangements for political access, formal advice, and post-office employment systematically favour private influence over public audit. Investigative reporting continues to document opaque lobbying, porous revolving-door controls, and the absence of routine ministerial diary publication. This expanded paper sets out a coherent architectural response: a region-first, competency-aware, transparency-default system designed to lower the returns to closed-door access, embed long-horizon institutional duty, and make influence and advice trails publicly inspectable by default.
+
+The model integrates six elements: (1) a legal hierarchy privileging regional self-governance subject to residual national functions; (2) competency demonstration for governing and advisory roles; (3) mandatory public records of formal advice and ministerial meetings; (4) structural constraints on advisor and consultant capture; (5) preferential citizen signalling on discretionary expenditure; and (6) an open, categorised issue-and-complaint system. This version deepens the treatment of edge cases, friction points, modular high-leverage alternatives that do not require full constitutional change, detailed specification of near-term instruments, and staged rollout pathways. Visual summaries of architecture, sequencing, and risk are included to aid evaluation and advocacy.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Introduction and Problem Diagnosis}
+
+Democratic legitimacy depends on the capacity of citizens and intermediary institutions to observe, contest, and correct public power. When influence channels are opaque, post-office employment rules are weakly enforced, and formal advice remains largely private, practical accountability erodes even while elections continue.
+
+Australian federal practice displays several reinforcing features:
+
+\begin{itemize}[leftmargin=*]
+    \item Ministerial diaries and meeting records are not subject to a strong, uniform, timely public disclosure regime.
+    \item The formal lobbyist register captures only a minority of professional influence activity; in-house government-relations work and many forms of sponsored parliamentary access remain outside effective public view.
+    \item Cooling-off and post-separation employment rules for ministers and senior officials have repeatedly proven porous.
+    \item Advisory and consultancy ecosystems create recurring pathways for industry-aligned expertise to shape policy while underlying interests and prior relationships stay imperfectly visible.
+\end{itemize}
+
+These are not primarily failures of individual character. They are predictable products of institutional design that makes private access relatively cheap and public scrutiny relatively costly. Organised interests can systematically out-compete diffuse public interests in the contest for ministerial time and policy attention.
+
+\begin{principlebox}{Core diagnosis}
+The central design failure is an inverted incentive structure: closed-door influence is high-return and low-visibility; public audit is high-cost and incomplete. Any durable remedy must invert those relative returns.
+\end{principlebox}
+
+This paper does not treat lobbying or expertise as illegitimate. It argues that the \textit{terms} on which influence and advice operate must be rebalanced toward transparency, verifiable independence of formal advisors, and structural reduction in the decisive power of private channels.
+
+\section{Design Principles}
+
+The architecture rests on six interlocking principles.
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Transparency by default.} Formal advice and records of significant access are public unless a narrowly defined, independently reviewable exception applies.
+    \item \textbf{Reduced returns to private access.} Rules should make closed-door influence less decisive relative to open, documented, contestable processes.
+    \item \textbf{Competency as a visible criterion.} Entry into governing and senior advisory roles should incorporate demonstrated capability alongside electoral or appointment legitimacy.
+    \item \textbf{Region-first subsidiarity with residual national functions.} Decisions locate at the lowest competent level, subject to clear residual duties for genuine network-level public goods.
+    \item \textbf{Anti-capture architecture.} Employment, placement, and disclosure rules actively impede revolving-door and proxy capture of advisory and regulatory functions.
+    \item \textbf{Long-horizon institutional duty.} Designated bodies carry explicit fiduciary-style obligations toward intergenerational and systemic outcomes that ordinary electoral cycles undervalue.
+\end{enumerate}
+
+These principles reinforce one another. Transparency without anti-capture rules can be gamed by volume. Competency mechanisms without public audit risk technocratic insulation. Regional empowerment without residual national capacity risks free-riding. The model therefore treats them as a package while recognising that change will be staged.
+
+\section{System Architecture Overview}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=0.9cm and 1.1cm,
+    box/.style={rectangle, draw=modelblue, fill=lightblue, rounded corners=3pt,
+                minimum width=3.4cm, minimum height=1.1cm, align=center, font=\small\bfseries},
+    smallbox/.style={rectangle, draw=modelgray, fill=white, rounded corners=2pt,
+                     minimum width=2.6cm, minimum height=0.75cm, align=center, font=\scriptsize},
+    arrow/.style={-{Stealth}, thick, modelblue}
+]
+\node[box] (trans) {Transparency\\Defaults};
+\node[box, right=of trans] (anti) {Anti-Capture\\Rules};
+\node[box, right=of anti] (comp) {Competency\\Mechanisms};
+
+\node[box, below=1.3cm of anti] (region) {Region-First\\Hierarchy};
+
+\node[smallbox, below left=1.1cm and -0.3cm of region] (advice) {Public Advice\\Records};
+\node[smallbox, below=1.1cm of region] (diaries) {Ministerial\\Diaries};
+\node[smallbox, below right=1.1cm and -0.3cm of region] (signal) {Preferential\\Signalling};
+\node[smallbox, right=0.6cm of signal] (issue) {Open Issue\\System};
+
+\node[box, fill=lightorange, draw=modelorange, below=2.6cm of region] (resid) {Residual National\\Functions};
+
+\draw[arrow] (trans) -- (region);
+\draw[arrow] (anti) -- (region);
+\draw[arrow] (comp) -- (region);
+\draw[arrow] (region) -- (advice);
+\draw[arrow] (region) -- (diaries);
+\draw[arrow] (region) -- (signal);
+\draw[arrow] (region) -- (issue);
+\draw[arrow] (region) -- (resid);
+
+\end{tikzpicture}
+\caption{High-level architecture: core principles feed a region-first operating layer, supported by transparency instruments and constrained by residual national functions.}
+\label{fig:architecture}
+\end{figure}
+
+\section{Core Institutional Elements}
+
+\subsection{Region-First Legal Hierarchy}
+
+Primary competence over matters that can be effectively governed at regional scale rests with regions. National residual powers are limited to genuinely non-separable functions or those generating large externalities: defence and external security; monetary system integrity; defined major inter-regional infrastructure; baseline rights and equity floors; and treaty implementation where international obligations bind the Commonwealth.
+
+Cross-regional coordination occurs through regular summits and standing technical interfaces. Dispute adjudication between region-first claims and demonstrated network-level necessity follows published criteria and open (or delayed-open) proceedings.
+
+\subsection{Competency-Aware Selection}
+
+Elections remain central. The model supplements them with structured demonstrations of capability: open version-controlled simulations using real public data; publicly inspectable prior-performance records; structured assessment of proposed programs; and independent scoring published before final selection.
+
+\begin{warningbox}{Competency edge cases}
+Simulations can be coached, culturally biased, or incomplete measures of judgment under ambiguity. Parallel qualitative evaluation and continuous public audit of the assessment systems themselves are required.
+\end{warningbox}
+
+\subsection{Public Advisory and Access Records}
+
+Formal advice is public by default. Exceptions (national security, genuine commercial-in-confidence, personal privacy) are narrowly enumerated, independently reviewable, and subject to delayed-release schedules. Ministerial diaries are published on a short fixed timetable in machine-readable form.
+
+\subsection{Anti-Capture Constraints}
+
+Formal advisory roles face meaningful cooling-off periods, limits on concurrent industry employment, structured public-interest placements, and public disclosure of prior roles and advice provenance.
+
+\subsection{Preferential Citizen Signalling}
+
+A defined portion of discretionary expenditure is subject to preferential citizen signalling, with protected baselines for long-horizon goods, equal citizen weighting, and transparency of organised campaigns.
+
+\subsection{Open Issue and Complaint System}
+
+A categorised public system (with private channels for security-sensitive matters) creates structured, durable accountability trails with published escalation thresholds.
+
+\section{Direct Response to Lobbying and Access Problems}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}p{4.0cm}p{5.2cm}p{4.3cm}@{}}
+\toprule
+\textbf{Current weakness} & \textbf{Model response} & \textbf{Near-term instrument} \\
+\midrule
+No strong diary publication & Transparency default for meetings & Mandatory timely diary publication \\
+Narrow lobbyist definition & Functional coverage of influence activity & Expanded register \& code \\
+Porous revolving door & Employment \& cooling-off constraints & Longer enforced cooling-off + disclosure \\
+Private formal advice & Public advice records by default & Selected-category advice publication \\
+Concentrated national access points & Region-first distribution of decisions & Regional competence pilots \\
+\bottomrule
+\end{tabular}
+\caption{Mapping of documented influence problems to model responses and near-term instruments.}
+\label{tab:lobbyingmap}
+\end{table}
+
+\section{Edge Cases and Friction Points}
+
+\subsection{Material Edge Cases}
+
+\begin{description}[style=nextline,leftmargin=1.2em]
+    \item[Classified / mixed advice.] Requires clear extraction rules for non-sensitive portions and independent review of classification decisions.
+    \item[Commercial-in-confidence.] Fixed maximum confidentiality periods, mandatory redacted public versions, and published exception statistics.
+    \item[Indigenous governance interfaces.] Region-first structures must specify interfaces with land councils, native title bodies, and related institutions.
+    \item[Digital and platform externalities.] Residual national capacity must be stress-tested for data, platform, and AI-related harms.
+    \item[Low or skewed participation.] Anti-brigading rules, participation diagnostics, and fallback decision rules are required.
+\end{description}
+
+\subsection{Political and Administrative Friction}
+
+\begin{itemize}[leftmargin=*]
+    \item Strong resistance to diary publication.
+    \item Public-service and consultancy opposition to cooling-off rules.
+    \item State-level resistance to regional experiments.
+    \item Administrative capacity risk under under-funding.
+    \item Potential chilling of frank advice.
+    \item Transition windows for intensified influence activity.
+\end{itemize}
+
+\section{Modular High-Leverage Alternatives}
+
+Full constitutional redesign is not required. The following modules can stand alone.
+
+\begin{modulebox}{Module 1 --- Mandatory Ministerial Diaries}
+Legislation or binding standards requiring publication within 14--28 days, machine-readable format, limited enumerated exceptions, independent review, delayed-release schedules, and annual public statistics on exception rates.
+\end{modulebox}
+
+\begin{modulebox}{Module 2 --- Expanded Influence Register}
+Functional definition of registrable influence activity covering in-house and sponsored access. Public, searchable, timely register with meaningful penalties.
+\end{modulebox}
+
+\begin{modulebox}{Module 3 --- Enforced Cooling-Off + Disclosure}
+Longer statutory periods, real sanctions, public register of relevant post-separation employment, independent monitoring, and anti-avoidance rules.
+\end{modulebox}
+
+\begin{modulebox}{Module 4 --- Public Advice Records (Selected Categories)}
+Start with a defined list of high-impact decisions. Structured summaries or transcripts by default. Narrow exceptions with review.
+\end{modulebox}
+
+\begin{modulebox}{Module 5 --- Open Issue / Complaint Platform}
+Categorised public system with private security channel, published escalation thresholds, independent oversight, and durable archive.
+\end{modulebox}
+
+\begin{modulebox}{Module 6 --- Preferential Signalling Pilot}
+Limited discretionary envelope, equal citizen weighting, protected long-horizon baselines, full transparency of results and campaigns, independent evaluation.
+\end{modulebox}
+
+\section{Staged Rollout Pathways}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=0.55cm,
+    stage/.style={rectangle, draw=modelblue, fill=lightblue, rounded corners=3pt,
+                  minimum width=12.2cm, minimum height=0.9cm, align=left, font=\small, inner xsep=6pt},
+    arrow/.style={-{Stealth}, thick, modelblue}
+]
+\node[stage] (s1) {\textbf{Stage 1 (Near-term):} Diaries + expanded register + cooling-off + selected advice records};
+\node[stage, below=of s1] (s2) {\textbf{Stage 2:} Advisory system reform (placements, separation rules, consultancy disclosure)};
+\node[stage, below=of s2] (s3) {\textbf{Stage 3:} State / multi-council pilots of regional competence, signalling, open issue platforms};
+\node[stage, below=of s3] (s4) {\textbf{Stage 4:} Competency mechanisms in limited appointment domains};
+\node[stage, below=of s4] (s5) {\textbf{Stage 5 (Longer-term):} Legal hierarchy clarification informed by pilot evidence};
+
+\draw[arrow] (s1) -- (s2);
+\draw[arrow] (s2) -- (s3);
+\draw[arrow] (s3) -- (s4);
+\draw[arrow] (s4) -- (s5);
+\end{tikzpicture}
+\caption{Staged rollout. Each stage delivers standalone value even if later stages are delayed.}
+\label{fig:rollout}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}p{2.6cm}p{4.0cm}p{3.6cm}p{3.4cm}@{}}
+\toprule
+\textbf{Stage} & \textbf{Primary instruments} & \textbf{Main friction} & \textbf{Success signal} \\
+\midrule
+1. Transparency package & Diaries, register, cooling-off, advice records & Ministerial \& industry resistance & Timely publication; reduced exception abuse \\
+2. Advisory reform & Academy pilots, separation rules & Consultancy \& APS pathway concerns & Fewer conflicted advice pathways \\
+3. Regional pilots & Competence, signalling, issue platforms & State government caution & Published evaluation vs pre-set metrics \\
+4. Competency tools & Open simulations for selected roles & Technocracy / bias accusations & Public confidence in fairness \\
+5. Hierarchy adjustment & Legislative clarification & High political difficulty & Evidence-based case from prior stages \\
+\bottomrule
+\end{tabular}
+\caption{Rollout stages, expected friction, and observable success signals.}
+\label{tab:rollout}
+\end{table}
+
+\section{Risk Matrix and Mitigations}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}p{3.1cm}p{1.8cm}p{1.8cm}p{5.8cm}@{}}
+\toprule
+\textbf{Risk} & \textbf{Likelihood} & \textbf{Impact} & \textbf{Primary mitigation} \\
+\midrule
+Transition capture & High & High & Protected staging; rapid transparency rules; independent monitoring \\
+Coordination failure & Medium & High & Clear residual mandates; published dispute criteria \\
+Competency metric gaming & Medium & Medium & Open tools; parallel qualitative assessment; public audit \\
+Participatory skew / overload & High & Medium & Anti-brigading design; diagnostics; protected baselines \\
+Adaptive re-capture & High & High & Continuous adversarial review; anti-avoidance language \\
+Administrative under-capacity & Medium & High & Dedicated funding; phased scope; review clauses \\
+Chilling of frank advice & Medium & Medium & Structured summaries; delayed release; senior leadership \\
+\bottomrule
+\end{tabular}
+\caption{Principal residual risks with indicative likelihood, impact, and mitigations.}
+\label{tab:risks}
+\end{table}
+
+\section{Relation to Existing Integrity Agendas}
+
+Elements map directly onto agendas already advanced by integrity-focused parliamentarians: stronger lobbying transparency, longer cooling-off periods, coverage of in-house influence, and visibility of ministerial access. The contribution is to embed those measures inside a coherent architectural logic. A near-term transparency-and-cooling-off package is both a freestanding improvement and the natural first step. Integrity-focused independents and crossbenchers remain the most plausible early audience.
+
+\section{Conclusion}
+
+Recurring lobbying, access, and revolving-door controversies are evidence of institutional incentives. An architecture that raises the cost of opaque influence, makes advice and access trails inspectable, distributes more decisions regionally, and embeds long-horizon duty offers a structural response.
+
+High-leverage modular reforms are available immediately and can be specified tightly enough to be useful in isolation. The fuller architecture supplies both a destination and criteria for judging whether successive changes move toward more accountable public power or merely rearrange existing patterns of influence.
+
+\appendix
+
+\section{Near-Term Legislative Priority List}
+
+\begin{enumerate}[leftmargin=*]
+    \item Mandatory, timely, machine-readable publication of ministerial and senior-official diaries with narrow, reviewable exceptions and public exception statistics.
+    \item Functional expansion of the influence-activity register to cover in-house and sponsored access work.
+    \item Strengthened cooling-off periods, real enforcement capacity, public post-separation employment disclosure, and anti-avoidance rules.
+    \item Initial public-record requirements for formal advice on a defined list of high-impact decision categories.
+    \item Independent oversight capacity resourced to monitor compliance and report publicly.
+\end{enumerate}
+
+\section{Competency Assessment Design Principles}
+
+\begin{itemize}[leftmargin=*]
+    \item Open-source or fully documented scenario designs with version control.
+    \item Post-exercise publication of materials, scoring frameworks, and aggregate results.
+    \item Structural separation of scenario designers from final political selection authorities.
+    \item Explicit bias auditing (cultural, socio-economic, experiential).
+    \item Parallel qualitative evaluation of judgment, ethical reasoning, and coalition capacity.
+    \item Regular independent review of whether the tools remain predictive and fair.
+\end{itemize}
+
+\section{Federal Compatibility Note}
+
+Australia already distributes power across Commonwealth, state, and local levels. The region-first proposal builds on that tradition. It seeks clearer residual national functions, transparency overlays that apply across levels, and experimental space for enhanced regional competence and citizen signalling. Constitutional change, where required, belongs to a later stage informed by statutory pilots.
+
+\vspace{1.5em}
+\begin{center}
+\textit{End of expanded working draft (Version 2).}
+\end{center}
 
 \end{document}
